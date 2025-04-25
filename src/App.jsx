@@ -21,7 +21,9 @@ const App = () => {
     const loadData = async () => {
       try {
         const botsData = await fetchBots();
+        console.log("Fetched bots:", botsData);
         const armyData = await fetchArmy();
+        console.log("Fetched army:", armyData);
 
         setBots(botsData);
         setArmy(armyData);

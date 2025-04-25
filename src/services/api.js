@@ -19,6 +19,46 @@ const db = {
       "bot_class": "Defender",
       "catchphrase": "100000011001011111110100110001010101100111001100",
       "avatar_url": "https://robohash.org/similiquereprehenderitet.png?size=300x300&set=set1"
+    },
+    {
+      "id": "200",
+      "name": "ZX-01",
+      "health": 80,
+      "damage": 70,
+      "armor": 40,
+      "bot_class": "Assault",
+      "catchphrase": "10101010101010101010101010101010",
+      "avatar_url": "https://robohash.org/assaultbot.png?size=300x300&set=set1"
+    },
+    {
+      "id": "201",
+      "name": "RX-02",
+      "health": 65,
+      "damage": 85,
+      "armor": 30,
+      "bot_class": "Defender",
+      "catchphrase": "11110000111100001111000011110000",
+      "avatar_url": "https://robohash.org/defenderbot.png?size=300x300&set=set1"
+    },
+    {
+      "id": "202",
+      "name": "MX-03",
+      "health": 90,
+      "damage": 60,
+      "armor": 50,
+      "bot_class": "Medic",
+      "catchphrase": "00001111000011110000111100001111",
+      "avatar_url": "https://robohash.org/medicbot.png?size=300x300&set=set1"
+    },
+    {
+      "id": "203",
+      "name": "TX-04",
+      "health": 70,
+      "damage": 75,
+      "armor": 35,
+      "bot_class": "Support",
+      "catchphrase": "10101010111100001111000011110000",
+      "avatar_url": "https://robohash.org/supportbot.png?size=300x300&set=set1"
     }
   ],
   "army": []
