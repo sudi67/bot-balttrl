@@ -51,6 +51,4 @@ The app can be deployed on Vercel. The current setup uses mock data and does not
 - Enhance UI/UX.
 - Add authentication and user management.
 
-## License
 
-This project is open source and available under the MIT License.
