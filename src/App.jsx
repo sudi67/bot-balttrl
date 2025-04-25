@@ -20,10 +20,8 @@ const App = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [botsData, armyData] = await Promise.all([
-          fetchBots(),
-          fetchArmy(),
-        ]);
+        const botsData = await fetchBots();
+        const armyData = await fetchArmy();
 
         setBots(botsData);
         setArmy(armyData);
@@ -39,7 +37,7 @@ const App = () => {
   }, []);
 
   // Handle adding a bot to army
-  const handleAddToArmy = async (bot) => {
+  const handleAddToArmy = (bot) => {
     try {
       // Check if the bot is already in the army
       if (army.some((armyBot) => armyBot.id === bot.id)) {
@@ -47,7 +45,7 @@ const App = () => {
         return;
       }
 
-      const addedBot = await addBotToArmy(bot);
+      const addedBot = addBotToArmy(bot);
       setArmy((prevArmy) => [...prevArmy, addedBot]);
     } catch (err) {
       console.error("Error adding bot to army:", err);
@@ -56,9 +54,9 @@ const App = () => {
   };
 
   // Handle removing a bot from army
-  const handleRemoveFromArmy = async (botId) => {
+  const handleRemoveFromArmy = (botId) => {
     try {
-      await removeBotFromArmy(botId);
+      removeBotFromArmy(botId);
       setArmy((prevArmy) => prevArmy.filter((bot) => bot.id !== botId));
     } catch (err) {
       console.error("Error removing bot from army:", err);
@@ -67,10 +65,10 @@ const App = () => {
   };
 
   // Handle deleting a bot
-  const handleDeleteBot = async (botId) => {
+  const handleDeleteBot = (botId) => {
     console.log("Deleting bot with ID:", botId);
     try {
-      const result = await deleteBot(botId);
+      const result = deleteBot(botId);
       console.log("Delete API response:", result);
 
       setBots((prevBots) => {

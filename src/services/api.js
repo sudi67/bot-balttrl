@@ -1,93 +1,58 @@
-const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
-const BOTS_URL = `${BASE_URL}/bots`;
-const ARMY_URL = `${BASE_URL}/army`;
+const db = {
+  "bots": [
+    {
+      "id": "109",
+      "name": "hjk-40",
+      "health": 75,
+      "damage": 84,
+      "armor": 31,
+      "bot_class": "Witch",
+      "catchphrase": "11010100110000100001110001100000010111101000001100",
+      "avatar_url": "https://robohash.org/quirationerem.png?size=300x300&set=set1"
+    },
+    {
+      "id": "111",
+      "name": "ya-81",
+      "health": 56,
+      "damage": 22,
+      "armor": 92,
+      "bot_class": "Defender",
+      "catchphrase": "100000011001011111110100110001010101100111001100",
+      "avatar_url": "https://robohash.org/similiquereprehenderitet.png?size=300x300&set=set1"
+    }
+  ],
+  "army": []
+};
 
-// Fetch all bots
+let mockBots = db.bots;
+let mockArmy = db.army;
+
 export const fetchBots = async () => {
-  try {
-    const response = await fetch(BOTS_URL);
-    if (!response.ok) {
-      throw new Error("Failed to fetch bots");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching bots:", error);
-    throw error;
-  }
+  return mockBots;
 };
 
-// Fetch army
 export const fetchArmy = async () => {
-  try {
-    const response = await fetch(ARMY_URL);
-    if (!response.ok) {
-      throw new Error("Failed to fetch army");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching army:", error);
-    throw error;
-  }
+  return mockArmy;
 };
 
-// Delete a bot (removes from both bots and army)
 export const deleteBot = async (botId) => {
-  try {
-    const response = await fetch(`${BOTS_URL}/${botId}`, {
-      method: "DELETE",
-    });
-    if (!response.ok) {
-      throw new Error("Failed to delete bot");
-    }
-    return true;
-  } catch (error) {
-    console.error("Error deleting bot:", error);
-    throw error;
+  const botIndex = mockBots.findIndex(bot => bot.id === botId);
+  if (botIndex !== -1) {
+    mockBots.splice(botIndex, 1);
   }
+  mockArmy = mockArmy.filter(bot => bot.id !== botId);
+  return true;
 };
 
-// Add bot to army
 export const addBotToArmy = async (bot) => {
-  try {
-    // Check if bot already exists in army
-    const armyResponse = await fetch(ARMY_URL);
-    const army = await armyResponse.json();
-
-    if (army.some((b) => b.id === bot.id)) {
-      throw new Error("Bot already in army");
-    }
-
-    const response = await fetch(ARMY_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(bot),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to add bot to army");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Error adding bot to army:", error);
-    throw error;
+  if (mockArmy.some(b => b.id === bot.id)) {
+    throw new Error("Bot already in army");
   }
+  mockArmy.push(bot);
+  return bot;
 };
 
-// Remove bot from army
 export const removeBotFromArmy = async (botId) => {
-  try {
-    const response = await fetch(`${ARMY_URL}/${botId}`, {
-      method: "DELETE",
-    });
-    if (!response.ok) {
-      throw new Error("Failed to remove bot from army");
-    }
-    return true;
-  } catch (error) {
-    console.error("Error removing bot from army:", error);
-    throw error;
-  }
+  mockArmy = mockArmy.filter(bot => bot.id !== botId);
+  return true;
 };
